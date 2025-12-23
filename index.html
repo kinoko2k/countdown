@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>はっぴーにゅーいやー かうんとだうん</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        .countdown {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 100px;
+        }
+
+        .time-box span:first-child {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+
+        .time-box .label {
+            font-size: 1rem;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        #year {
+            font-size: 8rem;
+            margin-top: 20px;
+            opacity: 0.1;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+        }
+
+        @media (max-width: 600px) {
+            .countdown {
+                gap: 15px;
+            }
+
+            .time-box {
+                min-width: 70px;
+                padding: 10px;
+            }
+
+            .time-box span:first-child {
+                font-size: 2rem;
+            }
+
+            #year {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>新年まであと</h1>
+        <div id="countdown" class="countdown">
+            <div class="time-box">
+                <span id="days">00</span>
+                <span class="label">日</span>
+            </div>
+            <div class="time-box">
+                <span id="hours">00</span>
+                <span class="label">時間</span>
+            </div>
+            <div class="time-box">
+                <span id="minutes">00</span>
+                <span class="label">分</span>
+            </div>
+            <div class="time-box">
+                <span id="seconds">00</span>
+                <span class="label">秒</span>
+            </div>
+        </div>
+        <h2 id="year">2026</h2>
+    </div>
+    <script>
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        const yearEl = document.getElementById('year');
+
+        const currentYear = new Date().getFullYear();
+        const nextYear = currentYear + 1;
+        const newYearTime = new Date(`January 01 ${nextYear} 00:00:00`);
+
+        yearEl.innerText = nextYear;
+
+        function updateCountdown() {
+            const currentTime = new Date();
+            const diff = newYearTime - currentTime;
+            const d = Math.floor(diff / 1000 / 60 / 60 / 24);
+            const h = Math.floor(diff / 1000 / 60 / 60) % 24;
+            const m = Math.floor(diff / 1000 / 60) % 60;
+            const s = Math.floor(diff / 1000) % 60;
+            daysEl.innerHTML = d;
+            hoursEl.innerHTML = h < 10 ? '0' + h : h;
+            minutesEl.innerHTML = m < 10 ? '0' + m : m;
+            secondsEl.innerHTML = s < 10 ? '0' + s : s;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+
+    </script>
+</body>
+
+</html>
