@@ -62,17 +62,6 @@
             text-transform: uppercase;
         }
 
-        #year {
-            font-size: 8rem;
-            margin-top: 20px;
-            opacity: 0.1;
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: -1;
-        }
-
         @media (max-width: 600px) {
             .countdown {
                 gap: 15px;
@@ -115,20 +104,16 @@
                 <span class="label">秒</span>
             </div>
         </div>
-        <h2 id="year">2026</h2>
     </div>
     <script>
         const daysEl = document.getElementById('days');
         const hoursEl = document.getElementById('hours');
         const minutesEl = document.getElementById('minutes');
         const secondsEl = document.getElementById('seconds');
-        const yearEl = document.getElementById('year');
 
         const currentYear = new Date().getFullYear();
         const nextYear = currentYear + 1;
         const newYearTime = new Date(`January 01 ${nextYear} 00:00:00`);
-
-        yearEl.innerText = nextYear;
 
         function updateCountdown() {
             const currentTime = new Date();
